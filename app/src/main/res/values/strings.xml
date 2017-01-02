@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">MVP_Dagger2</string>
+    <string name="home_description">
+        Learning MVP design pattern with Dagger2, We will create Gmail app </string>
+    <string name="title_activity_mail_list">MailListActivity</string>
+
+    <!-- key for credential -->
+    <string name="credential">credential</string>
+</resources>
