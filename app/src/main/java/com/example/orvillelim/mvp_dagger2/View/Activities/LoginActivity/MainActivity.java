@@ -1,14 +1,11 @@
 package com.example.orvillelim.mvp_dagger2.View.Activities.LoginActivity;
 
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
 import com.example.orvillelim.mvp_dagger2.App;
-import com.example.orvillelim.mvp_dagger2.Presenter.MainPresenter;
 import com.example.orvillelim.mvp_dagger2.R;
-import com.example.orvillelim.mvp_dagger2.View.Activities.MailListActivity.MailListActivity;
 import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential;
 import com.google.api.client.util.ExponentialBackOff;
 import com.google.api.services.gmail.GmailScopes;
@@ -21,7 +18,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends AppCompatActivity implements MainPresenter.View {
+public class MainActivity extends AppCompatActivity{
 
     private static final String[] SCOPES = { GmailScopes.GMAIL_LABELS };
     private GoogleAccountCredential credential;
@@ -41,24 +38,22 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
         ((App) getApplication() ).getAppComponent().inject(this);
         mainPresenter.setView(this);
 
+        // initiate something
+        mainPresenter.onActivityStart();
     }
 
     @OnClick(R.id.signin_btn) void googleSignIn(){
         signIn();
-        mainPresenter.startMailListActivity();
     }
 
-    private void signIn() {
-         credential = GoogleAccountCredential.usingOAuth2(
+
+    public void signIn() {
+        GoogleAccountCredential  credential = GoogleAccountCredential.usingOAuth2(
                 getApplicationContext(), Arrays.asList(SCOPES))
                 .setBackOff(new ExponentialBackOff());
 
         ((App) getApplication() ).setGoogleAccountCredential(credential);
     }
 
-    @Override
-    public void startMailListActivity() {
-        Intent intent = new Intent(this, MailListActivity.class);
-        startActivity(intent);
-    }
+
 }

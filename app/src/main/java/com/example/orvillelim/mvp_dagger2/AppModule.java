@@ -4,8 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import com.example.orvillelim.mvp_dagger2.Presenter.GoogleService;
-import com.example.orvillelim.mvp_dagger2.Presenter.MainPresenter;
+import com.example.orvillelim.mvp_dagger2.domain.GoogleService;
 
 import javax.inject.Singleton;
 

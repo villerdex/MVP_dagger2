@@ -8,9 +8,12 @@ import com.example.orvillelim.mvp_dagger2.App;
 import com.example.orvillelim.mvp_dagger2.R;
 import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential;
 
-public class MailListActivity extends AppCompatActivity {
+import javax.inject.Inject;
+
+public class MailListActivity extends AppCompatActivity implements MailListPresenter.MailView {
 
 
+    @Inject MailListPresenter presenter;
     GoogleAccountCredential credential;
 
     @Override
@@ -23,7 +26,14 @@ public class MailListActivity extends AppCompatActivity {
         credential = app.getGoogleAccountCredential();
 
         if(credential != null){
-            Toast.makeText(this, "Credential Recieve", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Credential Receive", Toast.LENGTH_LONG).show();
         }
+
+        presenter.onActivityStart();
+    }
+
+    @Override
+    public GoogleAccountCredential getCredential() {
+        return  ((App) getApplication() ).getGoogleAccountCredential();
     }
 }
