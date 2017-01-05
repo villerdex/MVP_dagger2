@@ -1,11 +1,13 @@
 package com.example.orvillelim.mvp_dagger2.View.Activities.LoginActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 import com.example.orvillelim.mvp_dagger2.App;
 import com.example.orvillelim.mvp_dagger2.R;
+import com.example.orvillelim.mvp_dagger2.View.Activities.MailListActivity.MailListActivity;
 import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential;
 import com.google.api.client.util.ExponentialBackOff;
 import com.google.api.services.gmail.GmailScopes;
@@ -53,6 +55,9 @@ public class MainActivity extends AppCompatActivity{
                 .setBackOff(new ExponentialBackOff());
 
         ((App) getApplication() ).setGoogleAccountCredential(credential);
+
+        Intent intent = new Intent(this, MailListActivity.class);
+        startActivity(intent);
     }
 
 

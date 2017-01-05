@@ -10,4 +10,12 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.orvillelim.mvp_dagger2.View.Activities.MailListActivity.MailListActivity">
 
+    <Button
+        android:text="Get Mails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="71dp"
+        android:id="@+id/btn_mail" />
 </RelativeLayout>

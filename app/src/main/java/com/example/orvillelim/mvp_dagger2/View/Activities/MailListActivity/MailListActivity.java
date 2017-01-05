@@ -10,6 +10,9 @@ import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccoun
 
 import javax.inject.Inject;
 
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 public class MailListActivity extends AppCompatActivity implements MailListPresenter.MailView {
 
 
@@ -21,6 +24,7 @@ public class MailListActivity extends AppCompatActivity implements MailListPrese
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mail_list2);
 
+        ButterKnife.bind(this);
         App app = ( (App) getApplication() );
         app.getAppComponent().inject(this);
         credential = app.getGoogleAccountCredential();
@@ -29,11 +33,21 @@ public class MailListActivity extends AppCompatActivity implements MailListPrese
             Toast.makeText(this, "Credential Receive", Toast.LENGTH_LONG).show();
         }
 
+        presenter.setView(this);
         presenter.onActivityStart();
     }
 
     @Override
     public GoogleAccountCredential getCredential() {
         return  ((App) getApplication() ).getGoogleAccountCredential();
+    }
+
+    @Override
+    public void showEmail(String email) {
+        Toast.makeText(this, email, Toast.LENGTH_LONG).show();
+    }
+
+    @OnClick(R.id.btn_mail) void getMails(){
+        presenter.fetchEmails();
     }
 }
