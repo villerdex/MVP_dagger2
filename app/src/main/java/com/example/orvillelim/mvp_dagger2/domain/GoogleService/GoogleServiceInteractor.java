@@ -13,24 +13,34 @@ import io.reactivex.ObservableOnSubscribe;
  * Created by orvillelim on 05/01/2017.
  */
 
-public class GoogleServiceInteractor  {
+public class GoogleServiceInteractor implements GoogleInteractor {
 
-     @Inject
-     GoogleService googleService;
-
+   GoogleService googleService;
+    ObservableEmitter emitter;
     @Inject
-    public GoogleServiceInteractor() {
+    public GoogleServiceInteractor(GoogleService googleService) {
+        this.googleService = googleService;
+        googleService.setGoogleInteractor(this);
     }
 
     public Observable getMails(){
-
-        return  Observable.create(new ObservableOnSubscribe<String>() {
+        return    Observable.create(new ObservableOnSubscribe<String>() {
             @Override
             public void subscribe(ObservableEmitter e) throws Exception {
-                   e.onNext(googleService.getEmails());
-                   e.onComplete();
+                emitter = e;
+                e.onNext(googleService.getEmails());
+                e.onComplete();
             }
         });
 
+    }
+    public void changeData(){
+        googleService.changeData();
+    }
+
+    @Override
+    public void notifyEmailChange() {
+        emitter.onNext(googleService.getEmails());
+        emitter.onComplete();
     }
 }

@@ -2,14 +2,24 @@ package com.example.orvillelim.mvp_dagger2.domain.GoogleService;
 
 import javax.inject.Inject;
 
+import io.reactivex.Observable;
+
 /**
  * Created by orvillelim on 02/01/2017.
  */
 
 public class GoogleService {
 
-    @Inject
+    String email = "How are you?";
+
+    GoogleInteractor googleInteractor;
+
     public GoogleService() {
+
+    }
+
+    public void setGoogleInteractor(GoogleInteractor googleInteractor){
+        this.googleInteractor = googleInteractor;
     }
 
     public String getEmails(){
@@ -24,7 +34,12 @@ public class GoogleService {
                 }
             }
 
-        String email = "How are you?";
         return email;
     }
+
+    public void changeData(){
+        email = "This is new Email";
+        googleInteractor.notifyEmailChange();
+    }
+
 }

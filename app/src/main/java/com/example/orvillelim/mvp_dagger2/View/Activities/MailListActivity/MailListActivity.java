@@ -27,7 +27,6 @@ public class MailListActivity extends AppCompatActivity implements MailListPrese
         ButterKnife.bind(this);
         App app = ( (App) getApplication() );
         app.getAppComponent().inject(this);
-        credential = app.getGoogleAccountCredential();
 
         if(credential != null){
             Toast.makeText(this, "Credential Receive", Toast.LENGTH_LONG).show();
@@ -49,5 +48,9 @@ public class MailListActivity extends AppCompatActivity implements MailListPrese
 
     @OnClick(R.id.btn_mail) void getMails(){
         presenter.fetchEmails();
+    }
+
+    @OnClick(R.id.btn_change) void changeData(){
+        presenter.changeData();
     }
 }

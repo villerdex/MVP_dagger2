@@ -80,11 +80,16 @@ public class MailListPresenter implements PresenterView<MailListPresenter.MailVi
             }
         };
 
+
         googleServiceInteractor.getMails()
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);
 
+    }
+
+    public void changeData(){
+        googleServiceInteractor.changeData();
     }
 
     public interface MailView {
