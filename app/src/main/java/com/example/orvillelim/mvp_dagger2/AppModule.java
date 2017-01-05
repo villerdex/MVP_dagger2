@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import com.example.orvillelim.mvp_dagger2.domain.GoogleService.GoogleService;
+import com.example.orvillelim.mvp_dagger2.Model.GoogleService;
 
 import javax.inject.Singleton;
 
@@ -29,13 +29,14 @@ public class AppModule {
 
     @Provides
     @Singleton
-    public GoogleService getGoogleService(){
+     GoogleService getGoogleService(){
         return new GoogleService();
     }
 
     @Provides
     @Singleton
-    public SharedPreferences getSharePreference(){
+     SharedPreferences getSharePreference(){
         return   PreferenceManager.getDefaultSharedPreferences(context);
     }
+
 }

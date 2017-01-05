@@ -4,6 +4,8 @@ import android.app.Application;
 
 import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential;
 
+import javax.inject.Inject;
+
 /**
  * Created by orvillelim on 02/01/2017.
  */
@@ -13,8 +15,8 @@ public class App extends Application {
     public AppComponents appComponents;
     private GoogleAccountCredential googleAccountCredential;
 
+    @Inject
     public App() {
-
     }
 
     public AppComponents getAppComponent(){
@@ -32,4 +34,6 @@ public class App extends Application {
     public void setGoogleAccountCredential(GoogleAccountCredential googleAccountCredential) {
         this.googleAccountCredential = googleAccountCredential;
     }
+
+
 }
