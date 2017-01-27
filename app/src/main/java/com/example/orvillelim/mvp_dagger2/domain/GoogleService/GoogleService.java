@@ -1,9 +1,5 @@
 package com.example.orvillelim.mvp_dagger2.domain.GoogleService;
 
-import javax.inject.Inject;
-
-import io.reactivex.Observable;
-
 /**
  * Created by orvillelim on 02/01/2017.
  */
@@ -12,14 +8,8 @@ public class GoogleService {
 
     String email = "How are you?";
 
-    GoogleInteractor googleInteractor;
 
-    public GoogleService() {
-
-    }
-
-    public void setGoogleInteractor(GoogleInteractor googleInteractor){
-        this.googleInteractor = googleInteractor;
+    public void setGoogleInteractor(){
     }
 
     public String getEmails(){
@@ -37,9 +27,9 @@ public class GoogleService {
         return email;
     }
 
-    public void changeData(){
+    public void changeData(GoogleInteractor mGoogleInteractor ){
         email = "This is new Email";
-        googleInteractor.notifyEmailChange();
+        mGoogleInteractor.notifyEmailChange();
     }
 
 }

@@ -4,7 +4,9 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import com.example.orvillelim.mvp_dagger2.Model.GoogleService;
+import com.example.orvillelim.mvp_dagger2.domain.GoogleService.GoogleInteractor;
+import com.example.orvillelim.mvp_dagger2.domain.GoogleService.GoogleService;
+import com.example.orvillelim.mvp_dagger2.domain.GoogleService.GoogleServiceInteractor;
 
 import javax.inject.Singleton;
 
@@ -13,7 +15,7 @@ import dagger.Provides;
 
 /**
  * Created by orvillelim on 02/01/2017.
- *
+ *xx
  *
  *
  */
@@ -28,13 +30,11 @@ public class AppModule {
     }
 
     @Provides
-    @Singleton
      GoogleService getGoogleService(){
         return new GoogleService();
     }
 
     @Provides
-    @Singleton
      SharedPreferences getSharePreference(){
         return   PreferenceManager.getDefaultSharedPreferences(context);
     }
