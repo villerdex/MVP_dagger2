@@ -14,4 +14,5 @@ public interface PresenterView<T> {
         void onActivityDestroy();
         void startActivity(Context context);
         void setView(T view);
+
 }
