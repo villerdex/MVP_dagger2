@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import com.example.orvillelim.mvp_dagger2.Domain.RealmService.RealmService;
+
 import dagger.Module;
 import dagger.Provides;
 
@@ -25,8 +27,13 @@ public class AppModule {
 
 
     @Provides
-     SharedPreferences getSharePreference(){
+    SharedPreferences getSharePreference(){
         return   PreferenceManager.getDefaultSharedPreferences(context);
+    }
+
+    @Provides
+    RealmService getRealmServices(){
+        return  new RealmService(context);
     }
 
 }

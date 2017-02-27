@@ -1,11 +1,10 @@
-package com.example.orvillelim.mvp_dagger2.domain.GoogleService;
+package com.example.orvillelim.mvp_dagger2.Domain.GithubService;
 
 import android.util.Log;
 
+import com.example.orvillelim.mvp_dagger2.Domain.RealmService.RealmService;
 import com.example.orvillelim.mvp_dagger2.Model.Repo;
-import com.google.gson.Gson;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -14,6 +13,8 @@ import io.reactivex.BackpressureStrategy;
 import io.reactivex.Flowable;
 import io.reactivex.FlowableEmitter;
 import io.reactivex.FlowableOnSubscribe;
+import io.realm.RealmQuery;
+import io.realm.RealmResults;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -27,6 +28,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class GithubServiceInteractor {
 
     private GithubService githubService;
+
+    @Inject
+    RealmService realmService;
 
     @Inject
     public GithubServiceInteractor() {
@@ -50,16 +54,24 @@ public class GithubServiceInteractor {
                @Override
                public void onResponse(Call<List<Repo>> call, Response<List<Repo>> response) {
 
-                   List<Repo>  repoArrayList = response.body();
 
-
-
-                   for (Repo repo: repoArrayList){
-                       System.out.println(repo.getName() + " ===" + repo.getDescription());
-
-                       System.out.println(repo.getOwner().getLogin());
+                   // Save all repo to realm database
+                   List<Repo> repoArrayList = response.body();
+                   for (Repo repo : repoArrayList) {
+                       realmService.getRealm().beginTransaction();
+                       realmService.getRealm().copyToRealm(repo);
+                       realmService.getRealm().commitTransaction();
                    }
 
+
+                   // query all repo
+                   RealmQuery<Repo> query = realmService.getRealm().where(Repo.class);
+                   RealmResults<Repo> result1 = query.findAll();
+
+                   // print all repo name
+                   for (Repo repo : result1){
+                       Log.d("tag", repo.getName());
+                   }
 
                }
 
@@ -82,6 +94,5 @@ public class GithubServiceInteractor {
 
             }
         }, BackpressureStrategy.BUFFER);
-
     }
 }

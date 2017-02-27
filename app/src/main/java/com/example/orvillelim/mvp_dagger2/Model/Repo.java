@@ -1,9 +1,11 @@
 package com.example.orvillelim.mvp_dagger2.Model;
 
+import io.realm.RealmObject;
+
 /**
  * Created by Didoy on 2/12/2017.
  */
-public class Repo {
+public class Repo extends RealmObject {
 
     String name;
     String description;

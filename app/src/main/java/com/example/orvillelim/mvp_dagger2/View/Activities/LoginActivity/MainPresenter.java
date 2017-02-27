@@ -4,7 +4,7 @@ import android.content.Context;
 
 import com.example.orvillelim.mvp_dagger2.Model.Repo;
 import com.example.orvillelim.mvp_dagger2.View.Activities.PresenterView;
-import com.example.orvillelim.mvp_dagger2.domain.GoogleService.GithubServiceInteractor;
+import com.example.orvillelim.mvp_dagger2.Domain.GithubService.GithubServiceInteractor;
 
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;

@@ -1,4 +1,4 @@
-package com.example.orvillelim.mvp_dagger2.domain.GoogleService;
+package com.example.orvillelim.mvp_dagger2.Domain.GithubService;
 
 import com.example.orvillelim.mvp_dagger2.Model.Repo;
 

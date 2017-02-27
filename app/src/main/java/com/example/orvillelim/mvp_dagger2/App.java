@@ -13,7 +13,6 @@ import javax.inject.Inject;
 public class App extends Application {
 
     public AppComponents appComponents;
-    private GoogleAccountCredential googleAccountCredential;
 
     @Inject
     public App() {
@@ -25,14 +24,6 @@ public class App extends Application {
                 .appModule(new AppModule(this))
                 .build();
         return appComponents;
-    }
-
-    public GoogleAccountCredential getGoogleAccountCredential() {
-        return googleAccountCredential;
-    }
-
-    public void setGoogleAccountCredential(GoogleAccountCredential googleAccountCredential) {
-        this.googleAccountCredential = googleAccountCredential;
     }
 
 
