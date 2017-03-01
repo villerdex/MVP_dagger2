@@ -13,6 +13,7 @@ import javax.inject.Inject;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import io.realm.RealmResults;
 
 /**
  * Created by orvillelim on 02/01/2017.
@@ -34,20 +35,17 @@ public class MainPresenter implements PresenterView<MainActivity> {
 
     @Override
     public void onActivityStart() {
-        System.out.println("Wewewew");
-        Subscriber observer = new Subscriber<Repo>() {
+        Subscriber observer = new Subscriber<RealmResults<Repo>>() {
 
             @Override
             public void onSubscribe(Subscription s) {
-
+                s.request(Long.MAX_VALUE);
             }
 
             @Override
-            public void onNext(Repo value) {
-
-                mainActivity.displayAllRepos();
+            public void onNext(RealmResults<Repo> repos) {
+                mainActivity.displayAllRepos(repos);
             }
-
 
             @Override
             public void onError(Throwable e) {
@@ -63,7 +61,7 @@ public class MainPresenter implements PresenterView<MainActivity> {
      githubServiceInteractor.getRepos()
              .subscribeOn(Schedulers.io())
              .subscribeOn(AndroidSchedulers.mainThread())
-              .subscribe(observer);
+             .subscribe(observer);
 
     }
 

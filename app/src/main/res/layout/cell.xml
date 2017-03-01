@@ -14,12 +14,11 @@
         android:weightSum="3">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="57dp"
+            android:layout_height="57dp"
             android:layout_marginTop="12dp"
             android:minWidth="35dp"
             android:minHeight="35dp"
-            app:srcCompat="@color/common_google_signin_btn_text_dark_default"
             android:id="@+id/imageView"
             android:layout_weight="0"/>
 
@@ -28,7 +27,7 @@
             android:layout_marginLeft="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/textView"
+            android:id="@+id/descriptionView"
             android:layout_marginTop="20dp"
             android:layout_weight="3"
             />

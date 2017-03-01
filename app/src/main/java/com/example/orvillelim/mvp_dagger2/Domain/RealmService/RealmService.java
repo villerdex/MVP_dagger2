@@ -3,6 +3,7 @@ package com.example.orvillelim.mvp_dagger2.Domain.RealmService;
 import android.content.Context;
 
 import io.realm.Realm;
+import io.realm.RealmConfiguration;
 
 /**
  * Created by Didoy on 2/27/2017.
@@ -16,11 +17,10 @@ public class RealmService {
     public RealmService(Context context) {
         this.context = context;
         Realm.init(context);
-    }
-
-
-    public void save(){
-
+        RealmConfiguration config = new RealmConfiguration
+                .Builder()
+                .deleteRealmIfMigrationNeeded()
+                .build();
     }
 
     public Realm getRealm(){

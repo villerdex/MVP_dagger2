@@ -29,6 +29,7 @@ public class GithubServiceInteractor {
 
     private GithubService githubService;
 
+
     @Inject
     RealmService realmService;
 
@@ -47,40 +48,6 @@ public class GithubServiceInteractor {
                 .build();
 
          githubService = retrofit.create(GithubService.class);
-
-       Call<List<Repo>> x =    githubService.listRepos("villerdex");
-
-           x.enqueue(new Callback<List<Repo>>() {
-               @Override
-               public void onResponse(Call<List<Repo>> call, Response<List<Repo>> response) {
-
-
-                   // Save all repo to realm database
-                   List<Repo> repoArrayList = response.body();
-                   for (Repo repo : repoArrayList) {
-                       realmService.getRealm().beginTransaction();
-                       realmService.getRealm().copyToRealm(repo);
-                       realmService.getRealm().commitTransaction();
-                   }
-
-
-                   // query all repo
-                   RealmQuery<Repo> query = realmService.getRealm().where(Repo.class);
-                   RealmResults<Repo> result1 = query.findAll();
-
-                   // print all repo name
-                   for (Repo repo : result1){
-                       Log.d("tag", repo.getName());
-                   }
-
-               }
-
-               @Override
-               public void onFailure(Call<List<Repo>> call, Throwable t) {
-
-               }
-           });
-
         System.out.println("Service initialize complete" );
 
     }
@@ -88,9 +55,43 @@ public class GithubServiceInteractor {
     public Flowable getRepos() {
         return Flowable.create(new FlowableOnSubscribe<List>() {
             @Override
-            public void subscribe(FlowableEmitter e) throws Exception {
-                e.onNext(githubService.listRepos("villerdex"));
-                e.onComplete();
+            public void subscribe(final FlowableEmitter e) throws Exception {
+
+                Call<List<Repo>> listRepos =  githubService.listRepos("villerdex");
+
+                listRepos.enqueue(new Callback<List<Repo>>() {
+                    @Override
+                    public void onResponse(Call<List<Repo>> call, Response<List<Repo>> response) {
+
+                        // Save all repo to realm database
+                        List<Repo> repoArrayList = response.body();
+                        for (Repo repo : repoArrayList) {
+                            realmService.getRealm().beginTransaction();
+                            realmService.getRealm().copyToRealmOrUpdate(repo); //save por update data on realm database
+                            realmService.getRealm().commitTransaction();
+                        }
+
+                        // query all repo
+                        RealmQuery<Repo> query = realmService.getRealm().where(Repo.class);
+                        RealmResults<Repo> result1 = query.findAll();
+
+                        // print all repo name
+//                        for (Repo repo : result1){
+//                        }
+
+                        e.onNext(result1);
+                        e.onComplete();
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<Repo>> call, Throwable t) {
+
+                    }
+                });
+
+
+
+
 
             }
         }, BackpressureStrategy.BUFFER);

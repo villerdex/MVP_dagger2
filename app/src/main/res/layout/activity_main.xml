@@ -10,13 +10,21 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.orvillelim.mvp_dagger2.View.Activities.LoginActivity.MainActivity">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/repoList"
+    <!--<android.support.v7.widget.RecyclerView-->
+        <!--android:id="@+id/repoListView"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_alignParentStart="true" />-->
+
+
+    <ListView
+        android:id="@+id/repoListView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
+        android:layout_alignParentStart="true"></ListView>
 
 </RelativeLayout>

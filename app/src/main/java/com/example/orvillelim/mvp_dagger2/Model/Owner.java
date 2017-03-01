@@ -1,6 +1,7 @@
 package com.example.orvillelim.mvp_dagger2.Model;
 
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 /**
  * Created by Didoy on 2/26/2017.
@@ -8,6 +9,7 @@ import io.realm.RealmObject;
 
 public class Owner extends RealmObject {
 
+    @PrimaryKey
     long id;
     String login;
     String avatar_url;

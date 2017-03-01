@@ -2,8 +2,6 @@ package com.example.orvillelim.mvp_dagger2;
 
 import android.app.Application;
 
-import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential;
-
 import javax.inject.Inject;
 
 /**
